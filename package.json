@@ -1,0 +1,14 @@
+{
+  "name": "orbita-gyroscope",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Interactive 280 mm gyroscope concept; not a physical simulation or production design",
+  "scripts": {
+    "test": "node verify-publication.cjs && node test-controls.cjs",
+    "qa": "node qa.cjs",
+    "export:glb": "node export-glb.cjs"
+  },
+  "devDependencies": {
+    "sharp": "0.35.5"
+  }
+}

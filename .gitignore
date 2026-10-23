@@ -1,0 +1,9 @@
+node_modules/
+preview.svg
+qa.json
+controls-test.json
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*

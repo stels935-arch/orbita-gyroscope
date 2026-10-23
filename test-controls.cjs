@@ -1,0 +1,14 @@
+// Unit tests using a minimal DOM and renderer stub, not browser/WebGL testing.
+const fs=require('fs'),vm=require('vm'),assert=require('assert'),T=require('./three.min.js'),create=require('./model.js'),Motion=require('./motion.js');
+class El{constructor(data={}){this.dataset=data;this.handlers={};this.style={};this.classList={toggle(){}};this.clientWidth=850;this.clientHeight=600;this.offsetWidth=100;this.checked=true;this.value='1';}addEventListener(k,f){this.handlers[k]=f;}setAttribute(){}appendChild(){}setPointerCapture(){}send(k,e={}){this.handlers[k]?.({target:this,preventDefault(){},...e});}}
+const html=fs.readFileSync(__dirname+'/Открыть Гироскоп.html','utf8'),els={};for(const m of html.matchAll(/id="([^"]+)"/g))els[m[1]]=new El();
+const views=['perspective','rotor','top'].map(view=>new El({view})),shells=['full','cut','none'].map(shell=>new El({shell}));let toy,frame,calls=0;
+class Renderer{setSize(){}setPixelRatio(){}render(){calls++;}}
+const document={hidden:false,getElementById:id=>els[id],createElement:()=>new El(),addEventListener(){},querySelectorAll:s=>s==='[data-view]'?views:s==='[data-shell]'?shells:[]};
+vm.runInNewContext(fs.readFileSync(__dirname+'/app.js','utf8'),{THREE:{...T,WebGLRenderer:Renderer},GyroMotion:Motion,createOrbitGyro:()=>{toy=create(T);return toy;},document,window:{devicePixelRatio:1},ResizeObserver:class{constructor(f){this.f=f;}observe(){this.f();}},performance:{now:()=>0},requestAnimationFrame:f=>frame=f,console});
+shells[2].send('click');assert(!toy.front.visible&&!toy.back.visible);shells[0].send('click');assert(toy.front.visible&&toy.back.visible);shells[1].send('click');assert(!toy.front.visible&&toy.back.visible);
+els.play.send('click');for(let i=0;i<120;i++)frame(i*16.67);assert(Math.abs(toy.rotor.rotation.x-.55)>.1);els.play.send('click');const angle=toy.rotor.rotation.x;frame(2100);assert.equal(angle,toy.rotor.rotation.x);
+els.hands.checked=true;els.hands.send('change');els.play.send('click');for(let i=121;i<240;i++)frame(i*16.67);assert(Math.abs(toy.body.rotation.x)+Math.abs(toy.body.rotation.z)>.01);
+els.speed.value='1.7';els.speed.send('input');assert.equal(els['speed-value'].value,'×1.7');els.reset.send('click');frame(4200);assert.equal(toy.rotor.rotation.x,.55);assert.equal(toy.body.rotation.x,0);assert.equal(els.hands.checked,false);
+els['show-axis'].checked=false;els['show-axis'].send('change');assert(!toy.axis.visible);for(const v of views)v.send('click');els.scene.send('keydown',{key:'ArrowLeft'});els.scene.send('wheel',{deltaY:100});frame(4500);assert(calls>200);
+const result={passed:['shell modes','animation start/pause','illustrated hand motion','speed control','reset','axis toggle','camera controls'],browser:false,renderer:'stub'};fs.writeFileSync(__dirname+'/controls-test.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));
