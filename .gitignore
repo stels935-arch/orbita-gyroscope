@@ -7,3 +7,4 @@ Thumbs.db
 *.log
 .env
 .env.*
+orbita-55/*.svg

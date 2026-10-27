@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-27",
+  "checks": [
+    "JavaScript syntax",
+    "55 mm assembled envelope and shell modes",
+    "Engaged motor envelope and nominal roller tangent at y = 16 mm",
+    "101 parked starter positions: specified translation, roller separation and motor body clearance",
+    "Released motor, roller, battery tray and board outside rotor envelope; fixed volumes clear shaft slab",
+    "Released parking pin lower tip y = 2.2 mm",
+    "300 guide azimuth / rotor spin poses inside the 55 mm outer envelope",
+    "Exploded view restores assembled transforms",
+    "501 prescribed timeline samples: parked startup, motor-only contact, release before unlock, paused/completed states",
+    "GLB v2 header, lengths and metre-scale vertex limits",
+    "HTML local resource references"
+  ],
+  "assembledBoundsMM": {
+    "x": 55,
+    "y": 55,
+    "z": 55
+  },
+  "nominalInnerRadiusMM": 25.5,
+  "rotorSweptRadiusMM": 16.070158679988197,
+  "maxRadiusAt300PosesMM": 27.500000793664437,
+  "maxRadiusDuringWithdrawalMM": 27.500000793664437,
+  "minimumMotorToParkedRotorYGapWhenAxialRangesOverlapMM": 0.25,
+  "releasedClearancesMM": {
+    "motorToRotorSweptY": 0.9298413200118034,
+    "rollerToRotorSweptY": 1.4301116960989226,
+    "batteryTrayToRotorSweptY": 1.1298412723280897,
+    "motorToInnerSphereAtVertices": 0.4201275920310934,
+    "batteryTrayToInnerSphereAtVertices": 0.5737087951992272
+  },
+  "browserQA": false,
+  "physicalDriveValidated": false,
+  "productionReady": false,
+  "limits": [
+    "Selected nominal envelope checks, not a complete collision/clearance or tolerance analysis.",
+    "Motor and cell are layout envelopes; no part selection, power, speed or runtime is verified.",
+    "No contact/friction, spring/latch actuation, electrical, strength, thermal or child-safety validation."
+  ]
+}

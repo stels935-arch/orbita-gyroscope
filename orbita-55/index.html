@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Орбита 55 мм: интерактивная компоновка гироскопа с внутренним двигателем-стартером и аккумулятором. Разрез, разнесённый вид и последовательность запуска.">
+  <title>Орбита 55 — электростарт, ручная игра</title>
+  <link rel="stylesheet" href="viewer55.css">
+  <script defer src="../three.min.js"></script><script defer src="model55.js"></script><script defer src="sequence55.js"></script><script defer src="viewer55.js"></script>
+</head>
+<body>
+  <header class="topbar"><a href="../">◉ ОРБИТА / МАСТЕРСКАЯ</a><span>КОМПОНОВКА 01 · 27.10.2026</span></header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">ЭЛЕКТРОСТАРТ · РУЧНАЯ ИГРА</p><h1>Большая идея.<br><span>В маленькой сфере.</span></h1><p class="lead">Двигатель раскручивает ротор и отводится.<br>Дальше — движение ваших рук.</p></div><div class="size"><strong>55<span>мм</span></strong><p>наружный диаметр<br>5,5 сантиметра</p></div></section>
+    <section class="workspace" aria-label="Интерактивная компоновка">
+      <div class="stage-panel">
+        <div class="stage-bar"><span><i></i> 3D / В МИЛЛИМЕТРАХ</span><div class="views" aria-label="Направление обзора"><button data-view="perspective" class="active" aria-pressed="true">3/4</button><button data-view="front" aria-pressed="false">Спереди</button><button data-view="top" aria-pressed="false">Сверху</button></div></div>
+        <div id="viewport"><canvas id="scene" tabindex="0" aria-label="Разрез гироскопа диаметром 55 мм. Мышь или палец вращают обзор, колесо меняет масштаб. Стрелки клавиатуры вращают камеру."></canvas><div id="labels" aria-hidden="true"></div><div class="size-tag">Ø 55 мм <span>СОБРАННЫЙ КОРПУС</span></div><div id="view-tag">ПЕРЕДНЯЯ ПОЛОВИНА СНЯТА</div><div id="error" hidden role="alert"><strong>3D сейчас недоступно.</strong><p>Попробуйте браузер с WebGL и аппаратным ускорением. Ниже доступен статичный разрез.</p><a href="preview55.png">Открыть разрез</a></div></div>
+        <div class="stage-footer"><span>Потяните модель для осмотра · колесо — масштаб</span><button id="camera-reset">Вернуть вид</button></div>
+        <div class="view-options"><div class="segmented" aria-label="Оболочка"><button data-shell="full" aria-pressed="false">Корпус</button><button data-shell="cut" class="active" aria-pressed="true">Разрез</button><button data-shell="none" aria-pressed="false">Без корпуса</button></div><label class="check"><input id="show-labels" type="checkbox" checked> Номера узлов</label></div>
+        <label class="explode-control" for="explode"><span>Разнести детали <output id="explode-value">0%</output></span><input id="explode" type="range" min="0" max="100" step="1" value="0"><small>Разнесённый вид — для осмотра. Габарит 55 мм относится только к собранной модели.</small></label>
+      </div>
+      <aside class="sidebar">
+        <p class="eyebrow">КАК ЭТО РАБОТАЕТ</p><h2>Мотор — только на старте</h2>
+        <div class="steps" aria-label="Этап механизма">
+          <button data-stage="layout" class="active" aria-pressed="true"><b>00</b><span>Компоновка<small>Все узлы внутри сферы</small></span></button>
+          <button data-stage="start" aria-pressed="false"><b>01</b><span>Раскрутка<small>Обойма зафиксирована, ролик прижат</small></span></button>
+          <button data-stage="release" aria-pressed="false"><b>02</b><span>Отвод стартера<small>Ролик свободен, стопор ещё закрыт</small></span></button>
+          <button data-stage="hand" aria-pressed="false"><b>03</b><span>Игра руками<small>Мотор выключен, обойма освобождена</small></span></button>
+        </div>
+        <button id="cycle" class="primary">▶ Показать весь цикл</button>
+        <div class="state-box" aria-live="polite"><div class="state-title"><span id="power-dot" class="power-dot"></span><strong id="power-status">Мотор выключен</strong></div><p id="status">Сверху — стартер. Снизу — аккумулятор и плата. В центре — кольцевой ротор.</p><p class="fine-print">Движения заданы программой и замедлены. Это не расчёт оборотов или ручного разгона.</p></div>
+        <div class="legend"><h3>Что где находится</h3>
+          <p><b class="key k1">1</b><span><strong>Кольцевой ротор</strong><small>Ø32 / Ø24 × 3 мм, общий вал</small></span></p>
+          <p><b class="key k2">2</b><span><strong>Двигатель стартера</strong><small>Резерв Ø6 × 10 мм, над ротором</small></span></p>
+          <p><b class="key k3">3</b><span><strong>Отводимый ролик</strong><small>Ø5 мм; после запуска не касается ротора</small></span></p>
+          <p><b class="key k4">4</b><span><strong>Аккумулятор</strong><small>Резерв 20 × 10 × 4 мм, в отдельном лотке</small></span></p>
+          <p><b class="key k5">5</b><span><strong>Плата управления и защиты</strong><small>Рядом с аккумулятором; условный объём</small></span></p>
+          <p><b class="key k6">6</b><span><strong>Парковочный стопор</strong><small>Удерживает обойму, не вращающийся ротор</small></span></p>
+          <p><b class="key k7">7</b><span><strong>Кольцевая направляющая</strong><small>Зона движения концов общего вала</small></span></p>
+        </div>
+      </aside>
+    </section>
+    <section class="explanation"><div><p class="eyebrow">ЛОГИКА КОМПОНОВКИ</p><h2>Отделяем старт<br>от свободного движения.</h2></div><div><p>Во время пуска обойма находится в парковочном положении. Маленький ролик передаёт вращение от двигателя на обод ротора. Затем вся каретка смещается на <strong>3 мм в сторону и 1,5 мм вверх</strong>: контакт разрывается, мотор отключается, стопор освобождает обойму.</p><p>Аккумулятор и электроника не вращаются вместе с ротором. Два прежних шаровых груза заменены симметричным кольцом. Цветные отметки на кольце нужны только для наблюдения за вращением.</p><p>Тонкие линии у оболочки показывают <strong>резерв маршрута проводки</strong>. Каналы, гибкие подводы и полноценная электрическая схема ещё не разработаны.</p></div></section>
+    <section class="technical"><h2>Что уже показано — и что ещё предстоит</h2><div class="technical-grid"><article><h3>В этой модели</h3><ul><li>Сфера Ø55 мм; условная стенка 2 мм.</li><li>Расположение основных узлов и траектория отвода стартера.</li><li>Разрез, прозрачная оболочка и разнесённый вид.</li><li>Разделение «мотор включён» / «игра руками».</li></ul></article><article class="warning"><h3>Не является чертежом для изготовления</h3><p>Мотор, аккумулятор и плата пока заданы резервными объёмами. Мощность, пусковой ток, ёмкость, длительность работы и безопасная скорость не определены.</p><p>Контактный ручной привод, пружина возврата, связь каретки со стопором, зарядка, балансировка, защита при падении и прочность корпуса требуют отдельного проектирования и испытаний. Зазоры номинальные, без производственных допусков.</p></article></div></section>
+    <details class="static-preview"><summary>Статичный разрез и файлы модели</summary><img src="preview55.png" alt="Геометрический разрез Орбиты 55 мм с обозначениями узлов" loading="lazy"><p><a href="orbita-55.glb" download>Скачать 3D-сборку GLB</a> · <a href="exploded55.png">Разнесённый вид</a> · <a href="layout-notes.html">Размеры и ограничения</a></p><p>GLB — неподвижная визуальная сборка в метрах, не производственный CAD. Изображения построены по геометрии модели.</p></details>
+    <footer><span>ОРБИТА 55 · КОМПОНОВОЧНАЯ КОНЦЕПЦИЯ</span><a href="../">Прежняя модель Ø280 мм</a><a href="https://github.com/stels935-arch/orbita-gyroscope">Исходники</a></footer>
+  </main>
+</body></html>

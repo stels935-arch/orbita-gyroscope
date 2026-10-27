@@ -1,0 +1,17 @@
+{
+  "passed": [
+    "timeline interlocks",
+    "motor off during hand play",
+    "roller decoupled after withdrawal",
+    "play/pause/complete",
+    "shell modes",
+    "stage selection",
+    "explosion and assembly",
+    "camera and label controls",
+    "HTML IDs"
+  ],
+  "sequenceSamples": 4167,
+  "browser": false,
+  "renderer": "stub",
+  "physicalDriveValidated": false
+}
